@@ -1,5 +1,3 @@
-FROM openjdk:17
-LABEL authors="hoict"
-ARG JAR_FILE=build/libs/cicd-0.0.1-SNAPSHOT.jar
-ADD ${JAR_FILE} docker-springboot.jar
-ENTRYPOINT ["java", "-jar", "/docker-springboot.jar", ">", "app.log"]
+FROM openjdk:17-jdk-slim
+ADD /build/libs/*.jar app.jar
+ENTRYPOINT ["java","-Djava.securityegd=file:/dev/./urandom","-jar","/app.jar"]
